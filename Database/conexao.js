@@ -10,7 +10,7 @@ export default async function conectar(){
         host:"localhost",
         user:"aluno29-pfsii",
         port:"3306",
-        password:"F7eI8uwrDzPyQcUqHDWC",
+        password:"aluno29-pfsii",
         database:"backendmusic"
     });
 
