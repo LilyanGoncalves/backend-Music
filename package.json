@@ -1,0 +1,23 @@
+{
+  "name": "camadasmodelo",
+  "version": "1.0.0",
+  "description": "camdasModelo",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mvc",
+    "backend",
+    "json"
+  ],
+  "author": "Cristiano Carvalho Parangaba",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mysql2": "^3.2.0"
+  }
+}
