@@ -22,7 +22,7 @@ app.use('/material', rotaMaterial);
 app.use('/funcao', rotaFuncao);
 app.use('/login', rotaLoginSistema);
 
-app.listen(PORT, 'localhost', ()=>{
-    console.log('backend ouvindo em http://localhost:'+ PORT);
+app.listen(PORT, HOSTNAME, ()=>{
+    console.log('backend ouvindo em ' + HOSTNAME + ':' + PORT);
 });
 
