@@ -16,4 +16,20 @@ export default class LoginSistema {
         return retornoBanco;
     }
 
+    get login() {
+        return this.#login;
+    }
+
+    set login(novologin) {
+        this.#login = novologin;
+    }
+
+    get senha() {
+        return this.#senha;
+    }
+
+    set senha(novasenha) {
+        this.#senha = novasenha;
+    }
+
 }

@@ -10,23 +10,29 @@ export default class LoginSistemaCTRL {
     autenticar(requisicao, resposta) {
         resposta.type("application/json");
         if (requisicao.method === "POST") {
-            
-            const login = requisicao.body.login;
-            const senha = createHmac('sha256', secret).update(requisicao.body.senha).digest('hex');
-            const dadosLogin = new LoginSistema(login ,senha);
 
+            //pega do body o login(CPF)
+            const login = requisicao.body.login;
+
+            //pega do body a senha e transforma na hash criptografada
+            const hash = createHmac('sha256', secret).update(requisicao.body.senha).digest('hex');
+            const dadosLogin = new LoginSistema(login, hash);
 
             //metodo assincrono -  then(entao)
             dadosLogin.autenticar()
-            .then((dados) => {
-                resposta.status(200).json(dados);
-            }).catch((erro) => {
-                resposta.status(500).json({
-                    status: false,
-                    mensagem: erro.message
-
+                .then((dados) => {
+                    resposta.status(200).json(
+                        {
+                            status: dados,
+                            mensagem: 'Usuário logado com sucesso!'
+                        }
+                    );
+                }).catch((erro) => {
+                    resposta.status(500).json({
+                        status: false,
+                        mensagem: erro.message
+                    });
                 });
-            });
         }
         else {
             resposta.status(400).json({

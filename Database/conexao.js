@@ -6,12 +6,21 @@ export default async function conectar(){
         return global.conexao;
     }
 
+    // const conexao = await mysql.createConnection({
+    //     host:"localhost",
+    //     user:"aluno29-pfsii",
+    //     port:"3306",
+    //     password:"F7eI8uwrDzPyQcUqHDWC",
+    //     database:"backendmusic"
+    // });
+
+
     const conexao = await mysql.createConnection({
         host:"localhost",
-        user:"aluno29-pfsii",
+        user:"root",
         port:"3306",
-        password:"F7eI8uwrDzPyQcUqHDWC",
-        database:"backendmusic"
+        password:"",
+        database:"injmusic-bd"
     });
 
     global.conexao = conexao;

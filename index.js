@@ -8,7 +8,8 @@ import rotaFuncao from './Routes/rotaFuncao.js';
 import rotaLoginSistema from './Routes/rotaLogin.js';
 
 const PORT = 4029;
-const HOSTNAME = '0.0.0.0';
+const HOSTNAME = 'localhost';
+// const HOSTNAME = '0.0.0.0';
 const app = express();
 app.use(cors({origin:"*"}));
 app.use(express.urlencoded({extended:false}));
