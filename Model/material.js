@@ -4,11 +4,13 @@ export default class Material {
 
     #id;
     #nome;
+    #idCategoria;
     
 
 
-    constructor(novoNome) {
+    constructor(novoNome, novoIdCategoria) {
         this.#nome = novoNome;
+        this.#idCategoria = novoIdCategoria;
     }
 
     get nome() {
@@ -19,10 +21,19 @@ export default class Material {
         this.#nome = novoNome;
     }
 
+    get idCategoria() {
+        return this.#idCategoria;
+    }
+
+    set idCategoria(novoIdCategoria) {
+        this.#idCategoria = novoIdCategoria;
+    }
+
     toJSON() {
         return {
             id: this.#id,
             nome: this.#nome,
+            idCategoria: this.#idCategoria
         }
     }
 

@@ -6,6 +6,7 @@ import rotaMusica from './Routes/rotaMusica.js';
 import rotaMaterial from './Routes/rotaMaterial.js';
 import rotaFuncao from './Routes/rotaFuncao.js';
 import rotaLoginSistema from './Routes/rotaLogin.js';
+import categoriaRotaMaterial from './Routes/categoriaRotaMaterial.js';
 
 const PORT = 4029;
 const HOSTNAME = 'localhost';
@@ -22,6 +23,7 @@ app.use('/musica', rotaMusica);
 app.use('/material', rotaMaterial);
 app.use('/funcao', rotaFuncao);
 app.use('/login', rotaLoginSistema);
+app.use('/categoriamaterial', categoriaRotaMaterial);
 
 app.listen(PORT, HOSTNAME, ()=>{
     console.log('backend ouvindo em ' + HOSTNAME + ':' + PORT);
