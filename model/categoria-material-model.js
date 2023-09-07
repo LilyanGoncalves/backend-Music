@@ -1,4 +1,4 @@
-import CategoriaMaterialBD from "../database/categoria-material-bd.js";
+import CategoriaMaterialBD from "../database2/categoria-material-bd.js";
 
 
 export default class CategoriaMaterial {

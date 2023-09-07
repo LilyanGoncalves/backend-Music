@@ -1,4 +1,4 @@
-import MusicaBD from "../database/musica-bd.js";
+import MusicaBD from "../database2/musica-bd.js";
 
 export default class Musica {
 

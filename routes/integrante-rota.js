@@ -1,5 +1,5 @@
 import { Router } from "express";
-import IntegranteController from "../controller/integrante-controller.js"
+import IntegranteController from "../controller/iintegrante-controller.js"
 
 const IntegranteRota = new Router();
 const integranteController = new IntegranteController();
