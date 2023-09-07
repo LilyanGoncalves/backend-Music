@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `injmusic-bd`.`integrante`(
     `telefone` varchar(11) DEFAULT NULL,
     `email` varchar(150) DEFAULT NULL,
     `funcaoid` int(11) NOT NULL,
-    `hash_password` VARCHAR(200) NOT NULL    
+    `hash_password` VARCHAR(200) NOT NULL,
     PRIMARY KEY(`cpf`),
     FOREIGN KEY (`funcaoid`) REFERENCES `funcao`(`id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
@@ -151,7 +151,8 @@ INSERT INTO
         `uf`,
         `telefone`,
         `email`,
-        `funcaoid`
+        `funcaoid`,
+        `hash_password`
     )
 VALUES
     (
@@ -163,12 +164,6 @@ VALUES
         'SP',
         '18996179838',
         'lilyangoncalves@gmail.com',
-        '1'
+        '1',
+        '2664252df5f9e76bae0c3fcfe511f48f9be2be2ec46755478c201d837d9e93e7'
     );
-
-
-
-ALTER TABLE `injmusic-bd`.`integrante` 
-ADD COLUMN `hash_password` VARCHAR(200) NULL AFTER `funcaoid`;
-
-

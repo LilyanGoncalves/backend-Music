@@ -11,7 +11,7 @@ export default async function conectar(){
         user:"aluno29-pfsii",
         port:"3306",
         password:"F7eI8uwrDzPyQcUqHDWC",
-        database:"backendmusic"
+        database:"injmusic-bd"
     });
 
 
