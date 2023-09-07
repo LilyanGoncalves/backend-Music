@@ -1,5 +1,5 @@
 import { Router } from "express";
-import EventoCTRL from "../Controller/EventoCtrl.js";
+import EventoCTRL from "../Controller/eventoCTRL.js";
 
 const rotaEvento = new Router();
 const eventoCTRL = new EventoCTRL();
