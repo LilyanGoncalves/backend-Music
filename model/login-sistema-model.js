@@ -1,4 +1,4 @@
-import LoginSistemaBD from "../database2/login-sistema-bd.js";
+import LoginSistemaBD from "../database/login-sistema-bd.js";
 
 export default class LoginSistema {
 

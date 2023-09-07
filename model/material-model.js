@@ -1,4 +1,4 @@
-import MaterialBD from "../database2/material-bd.js";
+import MaterialBD from "../database/material-bd.js";
 
 export default class Material {
 
