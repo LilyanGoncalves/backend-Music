@@ -9,10 +9,24 @@ import rotaLoginSistema from './Routes/rotaLogin.js';
 import categoriaRotaMaterial from './Routes/categoriaRotaMaterial.js';
 
 const PORT = 4029;
-const HOSTNAME = 'localhost';
-// const HOSTNAME = '0.0.0.0';
+// const HOSTNAME = 'localhost';
+const HOSTNAME = '0.0.0.0';
 const app = express();
-app.use(cors({origin:"*"}));
+app.use((req, res, next) => {
+
+    console.log("Origem da solicitação:", req.get("origin"));
+
+
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+
+    next();
+})
+
 app.use(express.urlencoded({extended:false}));
 
 app.use(express.json());
