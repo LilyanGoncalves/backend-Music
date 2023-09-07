@@ -1,12 +1,11 @@
 import express from 'express';
-import cors from 'cors'
-import rotaIntegrante from "./Routes/rotaIntegrante.js";
-import rotaEvento from "./Routes/rotaEvento.js";
-import rotaMusica from './Routes/rotaMusica.js';
-import rotaMaterial from './Routes/rotaMaterial.js';
-import rotaFuncao from './Routes/rotaFuncao.js';
-import rotaLoginSistema from './Routes/rotaLogin.js';
-import categoriaRotaMaterial from './Routes/categoriaRotaMaterial.js';
+import IntegranteRota from "./routes/integrante-rota.js";
+import EventoRota from "./routes/evento-rota.js";
+import MusicaRota from './routes/musica-rota.js';
+import MaterialRota from './routes/material-rota.js';
+import FuncaoRota from './routes/funcao-rota.js';
+import LoginSistemaRota from './routes/login-sistema-rota.js';
+import CategoriaMaterialRota from './routes/categoria-material-rota.js';
 
 const PORT = 4029;
 // const HOSTNAME = 'localhost';
@@ -31,13 +30,13 @@ app.use(express.urlencoded({extended:false}));
 
 app.use(express.json());
 
-app.use('/integrante', rotaIntegrante);
-app.use('/evento', rotaEvento);
-app.use('/musica', rotaMusica);
-app.use('/material', rotaMaterial);
-app.use('/funcao', rotaFuncao);
-app.use('/login', rotaLoginSistema);
-app.use('/categoriamaterial', categoriaRotaMaterial);
+app.use('/integrante', IntegranteRota);
+app.use('/evento', EventoRota);
+app.use('/musica', MusicaRota);
+app.use('/material', MaterialRota);
+app.use('/funcao', FuncaoRota);
+app.use('/login', LoginSistemaRota);
+app.use('/categoriamaterial', CategoriaMaterialRota);
 
 app.listen(PORT, HOSTNAME, ()=>{
     console.log('backend ouvindo em ' + HOSTNAME + ':' + PORT);

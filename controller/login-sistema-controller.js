@@ -1,9 +1,9 @@
-import LoginSistema from "../Model/loginSistema.js";
+import LoginSistema from "../model/login-sistema-model.js";
 const { createHmac } = await import('node:crypto');
 
 const secret = 'injMusic2023';
 
-export default class LoginSistemaCTRL {
+export default class LoginSistemaController {
 
     // requisiçao HTTP do tipo POST(GRAVAR)
 

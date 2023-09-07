@@ -1,5 +1,5 @@
-import Musica from "../Model/musica.js";
 import conectar from "./conexao.js";
+import Musica from "../model/musica-model.js";
 
 export default class MusicaBD {
 

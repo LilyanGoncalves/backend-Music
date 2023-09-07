@@ -1,4 +1,4 @@
-import IntegranteBD from "../Database/IntegranteBD.js";
+import IntegranteBD from "../database/integrante-bd.js";
 
 export default class Integrante{
     #cpf;        //# define que e um atributo privado

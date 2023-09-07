@@ -1,7 +1,7 @@
-import Evento from "../Model/Evento.js";
+import Evento from "../model/evento-model.js";
 
 // Manipula e controla eventos requisições vindas da internet por meio de HTTP
-export default class EventoCTRL {
+export default class EventoController {
     // Grava dados do evento
     gravar(req, resp) {
         resp.type("application/json");

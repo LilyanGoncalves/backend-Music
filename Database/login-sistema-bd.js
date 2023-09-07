@@ -1,7 +1,7 @@
-import LoginSistema from "../Model/loginSistema.js";
+import LoginSistema from "../model/login-sistema-model.js";
 import conectar from "./conexao.js";
 
-export default class LoginBD {
+export default class LoginSistemaBD {
 
     constructor() { }
 

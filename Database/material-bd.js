@@ -1,18 +1,18 @@
+import Material from "../model/material-model.js";
 import conectar from "./conexao.js";
-import CategoriaMaterial from "../Model/categoriaMaterial.js";
 
-export default class CategoriaMaterialBD {
+export default class MaterialBD {
 
     constructor() { }
 
 
-    async gravar(categoriaMaterial) {
-        if (categoriaMaterial instanceof CategoriaMaterial) {
+    async gravar(material) {
+        if (material instanceof Material) {
             const conexao = await conectar();
 
-            const SQL = "INSERT INTO categoria_material (`nome`) VALUES (?);"
+            const SQL = "INSERT INTO material (`nome`, `idcategoria`) VALUES (?,?);"
 
-            const parametros = [categoriaMaterial.nome]
+            const parametros = [material.nome, material.idCategoria]
             const query = await conexao.query(SQL, parametros, function (error) {
                 if (error) throw error;
             });
@@ -20,32 +20,32 @@ export default class CategoriaMaterialBD {
         }
     }
 
-    async atualizar(categoriaMaterial) {
-        if (categoriaMaterial instanceof CategoriaMaterial) {
+    async atualizar(material) {
+        if (material instanceof Material) {
             const conexao = await conectar();
 
-            const SQL = "UPDATE `categoria_material` SET `nome` = ? WHERE `id` = ?"
+            const SQL = "UPDATE `material` SET `nome` = ?,`idcategoria` = ? WHERE `id` = ?"
 
-            const parametros = [categoriaMaterial.nome, categoriaMaterial.id]
+            const parametros = [material.nome, material.idCategoria, material.id]
             let retornoBanco = await conexao.query(SQL, parametros);
             return retornoBanco[0].affectedRows;
         }
     }
 
-    async excluir(categoriaMaterial) {
-        if (categoriaMaterial instanceof CategoriaMaterial) {
+    async excluir(material) {
+        if (material instanceof Material) {
             const conexao = await conectar();
 
-            const SQL = "DELETE FROM categoria_material WHERE `id` = ?"
+            const SQL = "DELETE FROM material WHERE `id` = ?"
 
-            const parametros = [categoriaMaterial.id]
+            const parametros = [material.id]
             let retornoBanco = await conexao.query(SQL, parametros);
             return retornoBanco[0].affectedRows;
         }
     }
 
     async consultar(termo) {
-        let SQL = "SELECT * FROM categoria_material"
+        let SQL = "SELECT * FROM material"
                 
         if (parseInt(termo) != NaN && termo != null) {
             const parametros = [termo]

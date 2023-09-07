@@ -1,4 +1,4 @@
-import LoginBD from "../Database/loginBD.js";
+import LoginSistemaBD from "../database/login-sistema-bd.js";
 
 export default class LoginSistema {
 
@@ -11,7 +11,7 @@ export default class LoginSistema {
     }
    
     async autenticar() {
-        const loginBD = new LoginBD();
+        const loginBD = new LoginSistemaBD();
         let retornoBanco = await loginBD.autenticar(this);
         return retornoBanco;
     }

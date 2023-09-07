@@ -1,4 +1,4 @@
-import FuncaoBD from "../Database/funcaoBD.js";
+import FuncaoBD from "../database/funcao-bd.js";
 
 export default class Funcao {
 

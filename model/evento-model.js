@@ -1,4 +1,4 @@
-import EventoBD from "../Database/eventoBD.js";
+import EventoBD from "../database/evento-bd.js";
 
 export default class Evento {
     #codigo;

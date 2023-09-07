@@ -1,4 +1,4 @@
-import Funcao from "../Model/funcao.js";
+import Funcao from "../model/funcao-model.js";
 import conectar from "./conexao.js";
 
 export default class FuncaoBD {

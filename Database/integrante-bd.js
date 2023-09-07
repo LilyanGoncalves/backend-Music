@@ -1,5 +1,6 @@
-import Integrante from "../Model/Integrante.js";
+import Integrante from "../model/integrante-model.js";
 import conectar from "./conexao.js";
+
 export default class IntegranteBD {
 
     async incluir(integrante) {

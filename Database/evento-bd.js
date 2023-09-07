@@ -1,4 +1,4 @@
-import Evento from "../Model/Evento.js";
+import Evento from "../model/evento-model.js";
 import conectar from "./conexao.js";
 
 export default class EventoBD {

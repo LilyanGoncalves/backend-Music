@@ -1,7 +1,7 @@
-import Integrante from "../Model/Integrante.js";
+import Integrante from "../model/integrante-model.js";
 
 //manipula e controla integrantes requisicoes vinda da internet por meio de http
-export default class IntegranteCTRL{
+export default class IntegranteController{
     //grava dados do integrante
     gravar(req, resp){
         resp.type("application/json");

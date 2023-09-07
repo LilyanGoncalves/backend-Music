@@ -1,6 +1,6 @@
-import CategoriaMaterial from "../Model/categoriaMaterial.js";
+import Material from "../model/material-model.js";
 
-export default class CategoriaMaterialCTRL {
+export default class MaterialController {
 
     // requisiçao HTTP do tipo POST(GRAVAR)
     async gravar(requisicao, resposta) {
@@ -9,18 +9,19 @@ export default class CategoriaMaterialCTRL {
         if (requisicao.method === "POST" && requisicao.is('application/json')) {
             const dados = requisicao.body;
             const nome = dados.nome;
+            const idCategoria = dados.idCategoria;
 
             if (nome) {
-                const categoriaMaterial = new CategoriaMaterial(nome);
+                const material = new Material(nome, idCategoria);
 
                 //grava no banco de dados
                 //metodo assincrono -  then(entao)
-                await categoriaMaterial.gravar().then((resp) => {
+                await material.gravar().then((resp) => {
                     resposta.status(200).json({
                         status: true,
-                        mensagem: "Categoria Material gravado com sucesso!",
+                        mensagem: "Material gravado com sucesso!",
                         id: resp,
-                        material: categoriaMaterial.toJSON()
+                        material: material.toJSON()
                     });
                 }).catch((erro) => {
                     resposta.status(500).json({
@@ -32,7 +33,7 @@ export default class CategoriaMaterialCTRL {
             } else {
                 resposta.status(400).json({
                     status: false,
-                    mensagem: "Informe adequadamente todos os dados de uma categoria material a ser gravado"
+                    mensagem: "Informe adequadamente todos os dados de um material a ser gravado"
                 })
             }
 
@@ -52,14 +53,14 @@ export default class CategoriaMaterialCTRL {
         let termo;
         if (requisicao.method === "GET") {
             
-            const categoriaMaterial = new CategoriaMaterial();
+            const material = new Material();
             const id = requisicao.params.id;
 
             if (id != null) {
                 termo = id;
             }
             //metodo assincrono -  then(entao)
-            categoriaMaterial.consultar(termo).then((dados) => {
+            material.consultar(termo).then((dados) => {
                 resposta.status(200).json(dados);
             }).catch((erro) => {
                 resposta.status(500).json({
@@ -86,14 +87,14 @@ export default class CategoriaMaterialCTRL {
             const nome = dados.nome;
             const id = dados.id;
             if (nome) {
-                const categoriaMaterial = new CategoriaMaterial(nome);
-                categoriaMaterial.id = id;
+                const material = new Material(nome);
+                material.id = id;
                 //grava no banco de dados
                 //metodo assincrono -  then(entao)
-                categoriaMaterial.atualizar().then((retorno) => {
+                material.atualizar().then((retorno) => {
                     let mensagemFinal;
                     if (retorno > 0) {
-                        mensagemFinal = "Categoria Material atualizado com sucesso!";
+                        mensagemFinal = "Material atualizado com sucesso!";
                     } else {
                         mensagemFinal = "ID não encontrado!";
                     }
@@ -133,11 +134,11 @@ export default class CategoriaMaterialCTRL {
 
             if (id) {
                 // grava as informaçoes
-                const categoriaMaterial = new CategoriaMaterial();
-                categoriaMaterial.id = id;
+                const material = new Material();
+                material.id = id;
                 //Remove no banco de dados
                 //metodo assincrono -  then(entao)
-                categoriaMaterial.excluir().then((retorno) => {
+                material.excluir().then((retorno) => {
                     let mensagemFinal;
                     if (retorno > 0) {
                         mensagemFinal = "Material excluído com sucesso!";

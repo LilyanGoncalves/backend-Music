@@ -1,6 +1,6 @@
-import Material from "../Model/material.js";
+import CategoriaMaterial from "../model/categoria-material-model.js";
 
-export default class MaterialCTRL {
+export default class CategoriaMaterialController {
 
     // requisiçao HTTP do tipo POST(GRAVAR)
     async gravar(requisicao, resposta) {
@@ -9,19 +9,18 @@ export default class MaterialCTRL {
         if (requisicao.method === "POST" && requisicao.is('application/json')) {
             const dados = requisicao.body;
             const nome = dados.nome;
-            const idCategoria = dados.idCategoria;
 
             if (nome) {
-                const material = new Material(nome, idCategoria);
+                const categoriaMaterial = new CategoriaMaterial(nome);
 
                 //grava no banco de dados
                 //metodo assincrono -  then(entao)
-                await material.gravar().then((resp) => {
+                await categoriaMaterial.gravar().then((resp) => {
                     resposta.status(200).json({
                         status: true,
-                        mensagem: "Material gravado com sucesso!",
+                        mensagem: "Categoria Material gravado com sucesso!",
                         id: resp,
-                        material: material.toJSON()
+                        material: categoriaMaterial.toJSON()
                     });
                 }).catch((erro) => {
                     resposta.status(500).json({
@@ -33,7 +32,7 @@ export default class MaterialCTRL {
             } else {
                 resposta.status(400).json({
                     status: false,
-                    mensagem: "Informe adequadamente todos os dados de um material a ser gravado"
+                    mensagem: "Informe adequadamente todos os dados de uma categoria material a ser gravado"
                 })
             }
 
@@ -53,14 +52,14 @@ export default class MaterialCTRL {
         let termo;
         if (requisicao.method === "GET") {
             
-            const material = new Material();
+            const categoriaMaterial = new CategoriaMaterial();
             const id = requisicao.params.id;
 
             if (id != null) {
                 termo = id;
             }
             //metodo assincrono -  then(entao)
-            material.consultar(termo).then((dados) => {
+            categoriaMaterial.consultar(termo).then((dados) => {
                 resposta.status(200).json(dados);
             }).catch((erro) => {
                 resposta.status(500).json({
@@ -87,14 +86,14 @@ export default class MaterialCTRL {
             const nome = dados.nome;
             const id = dados.id;
             if (nome) {
-                const material = new Material(nome);
-                material.id = id;
+                const categoriaMaterial = new CategoriaMaterial(nome);
+                categoriaMaterial.id = id;
                 //grava no banco de dados
                 //metodo assincrono -  then(entao)
-                material.atualizar().then((retorno) => {
+                categoriaMaterial.atualizar().then((retorno) => {
                     let mensagemFinal;
                     if (retorno > 0) {
-                        mensagemFinal = "Material atualizado com sucesso!";
+                        mensagemFinal = "Categoria Material atualizado com sucesso!";
                     } else {
                         mensagemFinal = "ID não encontrado!";
                     }
@@ -134,11 +133,11 @@ export default class MaterialCTRL {
 
             if (id) {
                 // grava as informaçoes
-                const material = new Material();
-                material.id = id;
+                const categoriaMaterial = new CategoriaMaterial();
+                categoriaMaterial.id = id;
                 //Remove no banco de dados
                 //metodo assincrono -  then(entao)
-                material.excluir().then((retorno) => {
+                categoriaMaterial.excluir().then((retorno) => {
                     let mensagemFinal;
                     if (retorno > 0) {
                         mensagemFinal = "Material excluído com sucesso!";
