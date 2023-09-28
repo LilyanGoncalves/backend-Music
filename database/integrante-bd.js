@@ -9,11 +9,19 @@ export default class IntegranteBD {
             const conexao = await conectar();
             const sql = "INSERT INTO integrante(cpf, nome, endereco, bairro, cidade, uf, telefone, email, funcaoid) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
             const valores = [integrante.cpf, integrante.nome, integrante.endereco, integrante.bairro, integrante.cidade, integrante.uf, integrante.telefone, integrante.email, integrante.funcaoId];
-            const query = await conexao.query(sql, valores, function (error, results, fields) {
+            const resultado = await conexao.query(sql, valores, function (error, results, fields) {
                 if (error) throw error;
-
             });
-            return query[0].insertId;
+            for (let i = 0; i < integrante.listaFuncao.length; i++) {
+                const funcao = integrante.listaFuncao[i];
+                
+                const sql2 = "INSERT INTO integrante_funcao(integranteid, funcaoid) VALUES (?,?)";
+                const valores2 = [integrante.cpf, funcao.id]
+                const resultado2 = await conexao.query(sql2, valores2, function(error, results, fields){
+                    if (error) throw error;
+                });
+            }
+            return resultado[0].insertId;
         }
 
     }

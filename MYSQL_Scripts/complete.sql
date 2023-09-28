@@ -19,8 +19,7 @@ VALUES
     (6, 'Baterista'),
     (7, 'Guitarrista');
 
-
-    CREATE TABLE IF NOT EXISTS  `injmusic-bd`.`categoria_material` (
+CREATE TABLE IF NOT EXISTS `injmusic-bd`.`categoria_material` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `nome` VARCHAR(100) NOT NULL,
     PRIMARY KEY (`id`)
@@ -33,23 +32,27 @@ VALUES
     (2, 'Cabos'),
     (3, 'Instrumento de corda');
 
-
 CREATE TABLE IF NOT EXISTS `injmusic-bd`.`material` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `nome` varchar(50) NOT NULL,
     PRIMARY KEY(`id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
-ALTER TABLE `injmusic-bd`.`material` 
-ADD COLUMN `idcategoria` INT NULL AFTER `nome`,
-ADD INDEX `idcategoria_idx` (`idcategoria` ASC) VISIBLE;
+ALTER TABLE
+    `injmusic-bd`.`material`
+ADD
+    COLUMN `idcategoria` INT NULL
+AFTER
+    `nome`,
+ADD
+    INDEX `idcategoria_idx` (`idcategoria` ASC) VISIBLE;
+
 ;
-ALTER TABLE `injmusic-bd`.`material` 
-ADD CONSTRAINT `idcategoria`
-  FOREIGN KEY (`idcategoria`)
-  REFERENCES `injmusic-bd`.`categoria_material` (`id`)
-  ON DELETE NO ACTION
-  ON UPDATE NO ACTION;
+
+ALTER TABLE
+    `injmusic-bd`.`material`
+ADD
+    CONSTRAINT `idcategoria` FOREIGN KEY (`idcategoria`) REFERENCES `injmusic-bd`.`categoria_material` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 INSERT INTO
     `injmusic-bd`.`material` (`nome`, `idcategoria`)
@@ -134,12 +137,11 @@ CREATE TABLE IF NOT EXISTS `injmusic-bd`.`integrante`(
     `uf` varchar(2) DEFAULT NULL,
     `telefone` varchar(11) DEFAULT NULL,
     `email` varchar(150) DEFAULT NULL,
-    `funcaoid` int(11) NOT NULL,
+    `funcaoid` int(11) DEFAULT NULL,
     `hash_password` VARCHAR(200) NOT NULL,
     PRIMARY KEY(`cpf`),
     FOREIGN KEY (`funcaoid`) REFERENCES `funcao`(`id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
-
 
 INSERT INTO
     `injmusic-bd`.`integrante` (
@@ -166,4 +168,31 @@ VALUES
         'lilyangoncalves@gmail.com',
         '1',
         '2664252df5f9e76bae0c3fcfe511f48f9be2be2ec46755478c201d837d9e93e7'
+    ),
+    (
+        '11111111111',
+        'TESTE GERAL',
+        'RUA BRASIL, 2000',
+        'SAO PAULO',
+        'SAO PAULO',
+        'SP',
+        '11998765432',
+        'teste@gmail.com',
+        '1',
+        '2664252df5f9e76bae0c3fcfe511f48f9be2be2ec46755478c201d837d9e93e7'
     );
+
+CREATE TABLE IF NOT EXISTS `injmusic-bd`.`integrante_funcao` (
+    `integrante_cpf` varchar(11) NOT NULL,
+    `funcao_id` int(11) NOT NULL,
+    PRIMARY KEY (`integrante_cpf`, `funcao_id`),
+    FOREIGN KEY (`integrante_cpf`) REFERENCES `integrante` (`cpf`),
+    FOREIGN KEY (`funcao_id`) REFERENCES `funcao` (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+INSERT INTO
+    `injmusic-bd`.`integrante_funcao` (`integrante_cpf`, `funcao_id`)
+VALUES
+    ('36374800850', 1),
+    ('36374800850', 2),
+    ('36374800850', 3)

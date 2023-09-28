@@ -11,10 +11,11 @@ export default class Integrante{
     #email;
     #funcaoId;
     #funcaoNome;
+    #listaFuncao;
                   //construtor cria o cliente (como se fosse usar const cliente = new Cliente())
 
 
-    constructor(cpf, nome, endereco, bairro, cidade, uf, telefone, email, funcaoId, funcaoNome){   
+    constructor(cpf, nome, endereco, bairro, cidade, uf, telefone, email, funcaoId, listaFuncao){   
         this.#cpf = cpf;
         this.#nome = nome;
         this.#endereco = endereco;
@@ -24,7 +25,7 @@ export default class Integrante{
         this.#telefone = telefone;
         this.#email = email
         this.#funcaoId = funcaoId
-        this.#funcaoNome = funcaoNome
+        this.#listaFuncao = listaFuncao
 
     }
 
@@ -108,6 +109,16 @@ export default class Integrante{
     set funcaoNome(novoFuncaoNome){
         this.#funcaoNome = novoFuncaoNome;
     }
+
+    get listaFuncao(){
+        return this.#listaFuncao;
+    }
+
+    set listaFuncao(novaListaFuncao){
+        this.#listaFuncao = novaListaFuncao;
+    }
+
+
     toJSON(){
         return{
             "cpf"           : this.#cpf,
@@ -119,7 +130,8 @@ export default class Integrante{
             "telefone"      : this.#telefone,
             "email"         : this.#email,
             "funcaoid"      : this.#funcaoId,
-            "funcaoNome"    : this.#funcaoNome
+            "funcaoNome"    : this.#funcaoNome,
+            "listaFuncao"   : this.#listaFuncao
         }
     }
 

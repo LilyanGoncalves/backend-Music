@@ -16,10 +16,11 @@ export default class IntegranteController{
             const telefone = dados.telefone;
             const email = dados.email;
             const funcaoid = dados.funcaoid;
-            if (cpf && nome && endereco && bairro && cidade && uf && telefone && email && funcaoid)
+            const listaFuncao = dados.listaFuncao;
+            if (cpf && nome && endereco && bairro && cidade && uf && telefone && email)
             {
                 //grava
-                const integrante = new Integrante(cpf, nome, endereco, bairro, cidade, uf, telefone, email, funcaoid);
+                const integrante = new Integrante(cpf, nome, endereco, bairro, cidade, uf, telefone, email, funcaoid,listaFuncao);
                 //metodo assincrono
                 integrante.gravar().then((retorno)=>{
                     resp.status(200).json({
