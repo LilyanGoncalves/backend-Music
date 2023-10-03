@@ -32,11 +32,29 @@ export default class IntegranteBD {
             const conexao = await conectar();
             const sql = "UPDATE integrante SET nome = ?, endereco = ?, bairro = ?, cidade = ?, uf = ?, telefone = ?, email = ?, funcaoid = ?  WHERE cpf = ?";
             const valores = [integrante.nome, integrante.endereco, integrante.bairro, integrante.cidade, integrante.uf, integrante.telefone, integrante.email, integrante.funcaoId, integrante.cpf];
-            const query = await conexao.query(sql, valores, function (error, results, fields) {
+            const resultado = await conexao.query(sql, valores, function (error, results, fields) {
                 if (error) throw error;
 
             });
-            return query[0].affectedRows;
+
+            //apagar os registros muitos para muitos existentes no banco
+            const sql2 = "DELETE FROM `injmusic-bd`.`integrante_funcao` WHERE (`integranteid` = ?)";
+            const valores2 = [integrante.cpf]
+            const resultado2 = await conexao.query(sql2, valores2, function(error, results, fields){
+                if (error) throw error;
+            });
+
+            //Insiro novamente os relacionamentos muitos para muitos
+            for (let i = 0; i < integrante.listaFuncao.length; i++) {
+                const funcao = integrante.listaFuncao[i];
+                
+                const sql3 = "INSERT INTO integrante_funcao(integranteid, funcaoid) VALUES (?,?)";
+                const valores3 = [integrante.cpf, funcao.id]
+                const resultado3 = await conexao.query(sql3, valores3, function(error, results, fields){
+                    if (error) throw error;
+                });
+            }
+            return resultado[0].affectedRows + resultado2[0].affectedRows + resultado3[0].affectedRows;
         }
 
     }

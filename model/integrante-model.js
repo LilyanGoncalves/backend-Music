@@ -26,7 +26,6 @@ export default class Integrante{
         this.#email = email
         this.#funcaoId = funcaoId
         this.#listaFuncao = listaFuncao
-
     }
 
     get cpf(){

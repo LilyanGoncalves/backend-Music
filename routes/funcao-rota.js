@@ -12,6 +12,7 @@ FuncaoRota.post('/', funcaoController.gravar)
 .delete('/', funcaoController.excluir)
 .get('/', funcaoController.consultar)
 .get('/:nome',funcaoController.consultar)
+.get('/cpf/:cpf',funcaoController.consultarPorCPF)
 
 export default FuncaoRota;
 

@@ -183,15 +183,15 @@ VALUES
     );
 
 CREATE TABLE IF NOT EXISTS `injmusic-bd`.`integrante_funcao` (
-    `integrante_cpf` varchar(11) NOT NULL,
-    `funcao_id` int(11) NOT NULL,
-    PRIMARY KEY (`integrante_cpf`, `funcao_id`),
-    FOREIGN KEY (`integrante_cpf`) REFERENCES `integrante` (`cpf`),
-    FOREIGN KEY (`funcao_id`) REFERENCES `funcao` (`id`)
+    `integranteid` varchar(11) NOT NULL,
+    `funcaoid` int(11) NOT NULL,
+    PRIMARY KEY (`integranteid`, `funcaoid`),
+    FOREIGN KEY (`integranteid`) REFERENCES `integrante` (`cpf`),
+    FOREIGN KEY (`funcaoid`) REFERENCES `funcao` (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 INSERT INTO
-    `injmusic-bd`.`integrante_funcao` (`integrante_cpf`, `funcao_id`)
+    `injmusic-bd`.`integrante_funcao` (`integranteid`, `funcaoid`)
 VALUES
     ('36374800850', 1),
     ('36374800850', 2),

@@ -60,4 +60,22 @@ export default class FuncaoBD {
             return resposta[0];
         }
     }
+
+
+    async consultarFuncoesPorCPF(cpf){
+        const conexao = await conectar();
+
+        const sql = "SELECT F.id, F.nome FROM `injmusic-bd`.integrante AS I INNER JOIN `injmusic-bd`.integrante_funcao as I_F INNER JOIN `injmusic-bd`.funcao as F WHERE I.cpf = I_F.integranteid AND F.id = I_F.funcaoid AND i.cpf = ?";
+        const valores = [cpf]
+        const [rows] = await conexao.query(sql, valores);
+        const listaFuncoes = [];
+        for (const row of rows) {
+            const funcao = new Funcao(row['nome']);
+            funcao.id = row['id'];
+            listaFuncoes.push(funcao);
+        }
+        return listaFuncoes;
+        
+
+    }
 }

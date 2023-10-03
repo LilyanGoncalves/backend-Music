@@ -51,7 +51,7 @@ export default class FuncaoController {
         let termo;
         if (requisicao.method === "GET") {
             const nome = requisicao.params.nome;
-            
+
             if (nome != null) {
                 termo = nome;
             }
@@ -171,5 +171,29 @@ export default class FuncaoController {
 
     }
 
+    async consultarPorCPF(requisicao, resposta) {
+        resposta.type("application/json");
+        let termo;
+        if (requisicao.method === "GET") {
+            const cpf = requisicao.params.cpf;
 
+            const funcao = new Funcao();
+            //metodo assincrono -  then(entao)
+            funcao.consultarFuncoesPorCPF(cpf).then((dados) => {
+                resposta.status(200).json(dados);
+            }).catch((erro) => {
+                resposta.status(500).json({
+                    status: false,
+                    mensagem: erro.message
+
+                });
+            });
+        }
+        else {
+            resposta.status(400).json({
+                status: false,
+                mensagem: "Metodo não permitido ou informaçao no formato JSON não fornecido"
+            });
+        }
+    }
 }

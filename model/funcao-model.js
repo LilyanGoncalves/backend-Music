@@ -18,6 +18,14 @@ export default class Funcao {
         this.#nome = novoNome;
     }
 
+    get id() {
+        return this.#id;
+    }
+
+    set id(_id) {
+        this.#id = _id
+    }
+
     toJSON() {
         return {
             id: this.#id,
@@ -47,6 +55,12 @@ export default class Funcao {
         //termo pode ser o ID da objeto pesquisado. ele pode ser nulo
         const funcaoBD = new FuncaoBD();
         let retornoBanco = await funcaoBD.consultar(termo);
+        return retornoBanco
+    }
+
+    async consultarFuncoesPorCPF(cpf){
+        const funcaoBD = new FuncaoBD();
+        let retornoBanco = await funcaoBD.consultarFuncoesPorCPF(cpf);
         return retornoBanco
     }
 }
