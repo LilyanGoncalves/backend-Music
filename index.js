@@ -8,8 +8,8 @@ import LoginSistemaRota from './routes/login-sistema-rota.js';
 import CategoriaMaterialRota from './routes/categoria-material-rota.js';
 
 const PORT = 4029;
-const HOSTNAME = 'localhost';
-//const HOSTNAME = '0.0.0.0';
+//const HOSTNAME = 'localhost';
+const HOSTNAME = '0.0.0.0';
 const app = express();
 app.use((req, res, next) => {
 
