@@ -1,4 +1,5 @@
 import Integrante from "../model/integrante-model.js";
+import Funcao from "../model/funcao-model.js"
 import conectar from "./conexao.js";
 
 export default class IntegranteBD {
@@ -14,10 +15,10 @@ export default class IntegranteBD {
             });
             for (let i = 0; i < integrante.listaFuncao.length; i++) {
                 const funcao = integrante.listaFuncao[i];
-                
+
                 const sql2 = "INSERT INTO integrante_funcao(integranteid, funcaoid) VALUES (?,?)";
                 const valores2 = [integrante.cpf, funcao.id]
-                const resultado2 = await conexao.query(sql2, valores2, function(error, results, fields){
+                const resultado2 = await conexao.query(sql2, valores2, function (error, results, fields) {
                     if (error) throw error;
                 });
             }
@@ -40,17 +41,17 @@ export default class IntegranteBD {
             //apagar os registros muitos para muitos existentes no banco
             const sql2 = "DELETE FROM `injmusic-bd`.`integrante_funcao` WHERE (`integranteid` = ?)";
             const valores2 = [integrante.cpf]
-            const resultado2 = await conexao.query(sql2, valores2, function(error, results, fields){
+            const resultado2 = await conexao.query(sql2, valores2, function (error, results, fields) {
                 if (error) throw error;
             });
 
             //Insiro novamente os relacionamentos muitos para muitos
             for (let i = 0; i < integrante.listaFuncao.length; i++) {
                 const funcao = integrante.listaFuncao[i];
-                
+
                 const sql3 = "INSERT INTO integrante_funcao(integranteid, funcaoid) VALUES (?,?)";
                 const valores3 = [integrante.cpf, funcao.id]
-                const resultado3 = await conexao.query(sql3, valores3, function(error, results, fields){
+                const resultado3 = await conexao.query(sql3, valores3, function (error, results, fields) {
                     if (error) throw error;
                 });
             }
@@ -71,7 +72,7 @@ export default class IntegranteBD {
     }
     //nome = ?,endereco = ?,bairro = ?,cidade = ?,uf = ?,telefone = ?,email = ?,funcaoid = ?
     async consultar(termo) {
-        let sql = "SELECT integrante.cpf, integrante.nome, integrante.endereco, integrante.bairro, integrante.cidade, integrante.uf, integrante.telefone, integrante.email, integrante. funcaoid, funcao.nome as funcaonome FROM `injmusic-bd`.integrante as integrante inner join funcao where funcao.id = integrante.funcaoid ";
+        let sql = "SELECT integrante.cpf, integrante.nome, integrante.endereco, integrante.bairro, integrante.cidade, integrante.uf, integrante.telefone, integrante.email, integrante.funcaoid, funcao.nome as funcaonome FROM `injmusic-bd`.integrante as integrante inner join funcao where funcao.id = integrante.funcaoid ";
         let valores;
         if (termo) {
             sql += " WHERE nome LIKE ?"
@@ -82,7 +83,19 @@ export default class IntegranteBD {
         const [rows] = await conexao.query(sql, valores);
         const listaIntegrantes = [];
         for (const row of rows) {
-            const integrante = new Integrante(row['cpf'], row['nome'], row['endereco'], row['bairro'], row['cidade'], row['uf'], row['telefone'], row['email'], row['funcaoid'], row['funcaonome']);
+            
+            let listaDeFuncoes = [];
+            let sql2 = "SELECT I_F.funcaoid as id, F.nome FROM `injmusic-bd`.integrante_funcao as I_F inner join `injmusic-bd`.funcao as F WHERE F.id = I_F.funcaoid AND I_F.integranteid = ?"
+            let valores2 = [row['cpf']];
+            let resultado = await conexao.query(sql2, valores2)
+            
+            for (let i2 = 0; i2 < resultado[0].length; i2++) {
+                const element = resultado[0][i2];
+                let funcao = new Funcao(element['id'], element['nome'])
+                listaDeFuncoes.push(funcao)
+            }
+
+            const integrante = new Integrante(row['cpf'], row['nome'], row['endereco'], row['bairro'], row['cidade'], row['uf'], row['telefone'], row['email'], row['funcaoid'], row['funcaonome'], listaDeFuncoes);
             listaIntegrantes.push(integrante);
         }
         return listaIntegrantes;

@@ -15,7 +15,7 @@ export default class Integrante{
                   //construtor cria o cliente (como se fosse usar const cliente = new Cliente())
 
 
-    constructor(cpf, nome, endereco, bairro, cidade, uf, telefone, email, funcaoId, listaFuncao){   
+    constructor(cpf, nome, endereco, bairro, cidade, uf, telefone, email, funcaoId, funcaoNome, listaFuncao){   
         this.#cpf = cpf;
         this.#nome = nome;
         this.#endereco = endereco;
@@ -25,6 +25,7 @@ export default class Integrante{
         this.#telefone = telefone;
         this.#email = email
         this.#funcaoId = funcaoId
+        this.#funcaoNome = funcaoNome
         this.#listaFuncao = listaFuncao
     }
 

@@ -6,7 +6,8 @@ export default class Funcao {
     #nome;
 
 
-    constructor(novoNome) {
+    constructor(novoId, novoNome) {
+        this.#id = novoId;
         this.#nome = novoNome;
     }
 
