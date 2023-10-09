@@ -16,10 +16,11 @@ export default class IntegranteController {
             const telefone = dados.telefone;
             const email = dados.email;
             const funcaoid = dados.funcaoid;
+            const funcaoNome = dados.funcaoNome;
             const listaFuncao = dados.listaFuncao;
             if (cpf && nome && endereco && bairro && cidade && uf && telefone && email) {
                 //grava
-                const integrante = new Integrante(cpf, nome, endereco, bairro, cidade, uf, telefone, email, funcaoid, listaFuncao);
+                const integrante = new Integrante(cpf, nome, endereco, bairro, cidade, uf, telefone, email, funcaoid, funcaoNome, listaFuncao);
                 //metodo assincrono
                 integrante.gravar().then((retorno) => {
                     resp.status(200).json({
@@ -66,9 +67,11 @@ export default class IntegranteController {
             const telefone = dados.telefone;
             const email = dados.email;
             const funcaoid = dados.funcaoid;
-            if (cpf && nome && endereco && bairro && cidade && uf && telefone && email && funcaoid) {
+            const funcaoNome = dados.funcaoNome;
+            const listaFuncao = dados.listaFuncao;
+            if (cpf && nome && endereco && bairro && cidade && uf && telefone && email) {
                 //atualizar
-                const integrante = new Integrante(cpf, nome, endereco, bairro, cidade, uf, telefone, email, funcaoid);
+                const integrante = new Integrante(cpf, nome, endereco, bairro, cidade, uf, telefone, email, funcaoid, funcaoNome, listaFuncao);
                 //metodo assincrono
                 integrante.atualizar().then((retorno) => {
                     let mensagemFinal;

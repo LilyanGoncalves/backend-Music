@@ -8,8 +8,13 @@ import LoginSistemaRota from './routes/login-sistema-rota.js';
 import CategoriaMaterialRota from './routes/categoria-material-rota.js';
 
 const PORT = 4029;
-//const HOSTNAME = 'localhost';
+
+// PARA SUBIR NO SERVIDOR
 const HOSTNAME = '0.0.0.0';
+
+//PARA TESTE LOCAL
+// const HOSTNAME = 'localhost';
+
 const app = express();
 app.use((req, res, next) => {
 
@@ -26,7 +31,7 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json());
 
@@ -38,7 +43,7 @@ app.use('/funcao', FuncaoRota);
 app.use('/login', LoginSistemaRota);
 app.use('/categoriamaterial', CategoriaMaterialRota);
 
-app.listen(PORT, HOSTNAME, ()=>{
+app.listen(PORT, HOSTNAME, () => {
     console.log('backend ouvindo em ' + HOSTNAME + ':' + PORT);
 });
 

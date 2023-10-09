@@ -6,6 +6,7 @@ export default async function conectar(){
         return global.conexao;
     }
 
+    // PARA SUBIR NO SERVIDOR
     const conexao = await mysql.createConnection({
          host:"localhost",
          user:"aluno29-pfsii",
@@ -15,13 +16,14 @@ export default async function conectar(){
      });
 
 
-    /*const conexao = await mysql.createConnection({
-        host:"localhost",
-        port:"3306",
-        user:"user",
-        password:"123456",
-        database:"injmusic-bd"
-    });*/
+    //PARA TESTE LOCAL
+    // const conexao = await mysql.createConnection({
+    //     host:"localhost",
+    //     port:"3306",
+    //     user:"user",
+    //     password:"123456",
+    //     database:"injmusic-bd"
+    // });
 
     global.conexao = conexao;
 

@@ -44,7 +44,7 @@ export default class IntegranteBD {
             const resultado2 = await conexao.query(sql2, valores2, function (error, results, fields) {
                 if (error) throw error;
             });
-
+            let resultado4 = 0;
             //Insiro novamente os relacionamentos muitos para muitos
             for (let i = 0; i < integrante.listaFuncao.length; i++) {
                 const funcao = integrante.listaFuncao[i];
@@ -54,8 +54,9 @@ export default class IntegranteBD {
                 const resultado3 = await conexao.query(sql3, valores3, function (error, results, fields) {
                     if (error) throw error;
                 });
+                resultado4 += resultado3[0].affectedRows
             }
-            return resultado[0].affectedRows + resultado2[0].affectedRows + resultado3[0].affectedRows;
+            return resultado[0].affectedRows + resultado2[0].affectedRows + resultado4;
         }
 
     }
