@@ -43,6 +43,9 @@ app.use('/funcao', FuncaoRota);
 app.use('/login', LoginSistemaRota);
 app.use('/categoriamaterial', CategoriaMaterialRota);
 
+app.use('/', (req, resp) => {
+    resp.status(200).json({ status: true, message: 'API OK' });
+});
 app.listen(PORT, HOSTNAME, () => {
     console.log('backend ouvindo em ' + HOSTNAME + ':' + PORT);
 });
