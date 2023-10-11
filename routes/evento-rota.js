@@ -10,6 +10,6 @@ EventoRota.post("/", eventoController.gravar)
 .put("/", eventoController.atualizar)
 .delete("/", eventoController.excluir)
 .get("/", eventoController.consultar)
-.get("/:codigo", eventoController.consultaEvento);
+.get("/:id", eventoController.consultaEvento);
 
 export default EventoRota;

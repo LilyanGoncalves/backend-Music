@@ -1,30 +1,30 @@
 import EventoBD from "../database/evento-bd.js";
 
 export default class Evento {
-    #codigo;
+    #id;
     #nome;
     #data;
-    #hora;
+    #horario;
     #descricao;
-    #banda;
-    #musica;
+    #listaMusicos;//[{id,nome,idFuncao,funcaoNome}]
+    #listaMusicas;//[{id,nome,tomEscolhido,bpmEscolhido,linkYouTube}]
 
-    constructor(codigo, nome, data, hora, descricao, banda, musica) {
-        this.#codigo = codigo;
+    constructor(id, nome, data, horario, descricao, listaMusicos, listaMusicas) {
+        this.#id = id;
         this.#nome = nome;
         this.#data = data;
-        this.#hora = hora;
+        this.#horario = horario;
         this.#descricao = descricao;
-        this.#banda = banda;
-        this.#musica = musica;
+        this.#listaMusicos = listaMusicos;
+        this.#listaMusicas = listaMusicas;
     }
 
-    get codigo() {
-        return this.#codigo;
+    get id() {
+        return this.#id;
     }
 
-    set codigo(novoCodigo) {
-        this.#codigo = novoCodigo;
+    set id(novoCodigo) {
+        this.#id = novoCodigo;
     }
 
     get nome() {
@@ -44,12 +44,12 @@ export default class Evento {
         this.#data = novaData;
     }
 
-    get hora() {
-        return this.#hora;
+    get horario() {
+        return this.#horario;
     }
 
-    set hora(novaHora) {
-        this.#hora = novaHora;
+    set horario(novaHorario) {
+        this.#horario = novaHorario;
     }
 
     get descricao() {
@@ -60,31 +60,31 @@ export default class Evento {
         this.#descricao = novaDescricao;
     }
 
-    get banda() {
-        return this.#banda;
+    get listaMusicos() {
+        return this.#listaMusicos;
     }
 
-    set banda(novaBanda) {
-        this.#banda = novaBanda;
+    set listaMusicos(novaBanda) {
+        this.#listaMusicos = novaBanda;
     }
 
-    get musica() {
-        return this.#musica;
+    get listaMusicas() {
+        return this.#listaMusicas;
     }
 
-    set musica(novaMusica) {
-        this.#musica = novaMusica;
+    set listaMusicas(novaMusica) {
+        this.#listaMusicas = novaMusica;
     }
 
     toJSON() {
         return {
-            "codigo": this.#codigo,
+            "id": this.#id,
             "nome": this.#nome,
             "data": this.#data,
-            "hora": this.#hora,
+            "horario": this.#horario,
             "descricao": this.#descricao,
-            "banda": this.#banda,
-            "musica": this.#musica
+            "listaMusicos": this.#listaMusicos,
+            "listaMusicas": this.#listaMusicas
         }
     }
 
@@ -109,9 +109,9 @@ export default class Evento {
         return eventos;
     }
 
-    async consultarCodigo(codigo) {
+    async consultarCodigo(id) {
         const eventoBD = new EventoBD();
-        const eventos = await eventoBD.consultarCodigo(codigo);
+        const eventos = await eventoBD.consultarCodigo(id);
         return eventos;
     }
 }
