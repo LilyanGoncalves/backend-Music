@@ -195,4 +195,36 @@ INSERT INTO
 VALUES
     ('36374800850', 1),
     ('36374800850', 2),
-    ('36374800850', 3)
+    ('36374800850', 3);
+
+CREATE TABLE `injmusic-bd`.`evento` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `nome` VARCHAR(100) NOT NULL,
+    `data` DATE NOT NULL,
+    `horario` TIME NOT NULL,
+    `descricao` VARCHAR(500) NULL,
+    PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `injmusic-bd`.`evento_musicos` (
+    `eventoid` INT NOT NULL,
+    `integranteid` VARCHAR(11) NOT NULL,
+    `funcaoid` INT NOT NULL,
+    PRIMARY KEY (`eventoid`, `integranteid`, `funcaoid`),
+    FOREIGN KEY (`eventoid`) REFERENCES `evento` (`id`),
+    FOREIGN KEY (`integranteid`) REFERENCES `integrante` (`cpf`),
+    FOREIGN KEY (`funcaoid`) REFERENCES `funcao` (`id`)
+)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+
+
+CREATE TABLE `injmusic-bd`.`evento_musicas` (
+    `eventoid` INT NOT NULL,
+    `musicaid` INT NOT NULL,
+    `tomescolhido` VARCHAR(5),
+    `bpmescolhido` VARCHAR(3),
+    `linkyoutube` VARCHAR(45),
+    PRIMARY KEY (`eventoid`, `musicaid`),
+    FOREIGN KEY (`eventoid`) REFERENCES `evento` (`id`),
+    FOREIGN KEY (`musicaid`) REFERENCES `musica` (`id`)
+)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;

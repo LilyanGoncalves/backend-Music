@@ -5,8 +5,8 @@ export default class EventoBD {
     async incluir(evento) {
         if (evento instanceof Evento) {
             const conexao = await conectar();
-            const sql = "INSERT INTO evento(codigo, nome, data, hora, descricao, banda, musica) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            const valores = [evento.codigo, evento.nome, evento.data, evento.hora, evento.descricao, evento.banda, evento.musica];
+            const sql = "INSERT INTO evento(id, nome, data, horario, descricao, banda, musica) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            const valores = [evento.id, evento.nome, evento.data, evento.horario, evento.descricao, evento.banda, evento.musica];
             await conexao.query(sql, valores);
         }
     }
@@ -14,8 +14,8 @@ export default class EventoBD {
     async alterar(evento) {
         if (evento instanceof Evento) {
             const conexao = await conectar();
-            const sql = "UPDATE evento SET nome = ?, data = ?, hora = ?, descricao = ?, banda = ?, musica = ? WHERE codigo = ?";
-            const valores = [evento.nome, evento.data, evento.hora, evento.descricao, evento.banda, evento.musica, evento.codigo];
+            const sql = "UPDATE evento SET nome = ?, data = ?, horario = ?, descricao = ?, banda = ?, musica = ? WHERE id = ?";
+            const valores = [evento.nome, evento.data, evento.horario, evento.descricao, evento.banda, evento.musica, evento.id];
             await conexao.query(sql, valores);
         }
     }
@@ -23,8 +23,8 @@ export default class EventoBD {
     async excluir(evento) {
         if (evento instanceof Evento) {
             const conexao = await conectar();
-            const sql = "DELETE FROM evento WHERE codigo = ?";
-            const valores = [evento.codigo];
+            const sql = "DELETE FROM evento WHERE id = ?";
+            const valores = [evento.id];
             await conexao.query(sql, valores);
         }
     }
@@ -36,20 +36,20 @@ export default class EventoBD {
         const [rows] = await conexao.query(sql, valores);
         const listaEventos = [];
         for (const row of rows) {
-            const evento = new Evento(row['codigo'], row['nome'], row['data'], row['hora'], row['descricao'], row['banda'], row['musica']);
+            const evento = new Evento(row['id'], row['nome'], row['data'], row['horario'], row['descricao'], row['banda'], row['musica']);
             listaEventos.push(evento);
         }
         return listaEventos;
     }
 
-    async consultarCodigo(codigo) {
+    async consultarid(id) {
         const conexao = await conectar();
-        const sql = "SELECT * FROM evento WHERE codigo = ?";
-        const valores = [codigo];
+        const sql = "SELECT * FROM evento WHERE id = ?";
+        const valores = [id];
         const [rows] = await conexao.query(sql, valores);
         const listaEventos = [];
         for (const row of rows) {
-            const evento = new Evento(row['codigo'], row['nome'], row['data'], row['hora'], row['descricao'], row['banda'], row['musica']);
+            const evento = new Evento(row['id'], row['nome'], row['data'], row['horario'], row['descricao'], row['banda'], row['musica']);
             listaEventos.push(evento);
         }
         return listaEventos;

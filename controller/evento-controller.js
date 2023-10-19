@@ -7,16 +7,15 @@ export default class EventoController {
         resp.type("application/json");
         if (req.method === "POST" && req.is('application/json')) {
             const dados = req.body;
-            const codigo = dados.codigo;
             const nome = dados.nome;
             const data = dados.data;
-            const hora = dados.hora;
+            const horario = dados.horario;
             const descricao = dados.descricao;
-            const banda = dados.banda;
-            const musica = dados.musica;
-            if (codigo && nome && data && hora && descricao && banda && musica) {
+            const listaMusicos = dados.listaMusicos;
+            const listaMusicas = dados.listaMusicas;
+            if (nome && data && horario) {
                 // Grava
-                const evento = new Evento(codigo, nome, data, hora, descricao, banda, musica);
+                const evento = new Evento(nome, data, horario, descricao, listaMusicos, listaMusicas);
                 // Método assíncrono
                 evento.gravar().then(() => {
                     resp.status(200).json({
@@ -50,16 +49,16 @@ export default class EventoController {
         resp.type("application/json");
         if (req.method === "PUT" && req.is('application/json')) {
             const dados = req.body;
-            const codigo = dados.codigo;
+            const id = dados.id;
             const nome = dados.nome;
             const data = dados.data;
-            const hora = dados.hora;
+            const horario = dados.horario;
             const descricao = dados.descricao;
-            const banda = dados.banda;
-            const musica = dados.musica;
-            if (codigo && nome && data && hora && descricao && banda && musica) {
+            const listaMusicos = dados.listaMusicos;
+            const listaMusicas = dados.listaMusicas;
+            if (id && nome && data && horario && descricao && listaMusicos && listaMusicas) {
                 // Atualizar
-                const evento = new Evento(codigo, nome, data, hora, descricao, banda, musica);
+                const evento = new Evento(id, nome, data, horario, descricao, listaMusicos, listaMusicas);
                 // Método assíncrono
                 evento.atualizar().then(() => {
                     resp.status(200).json({
@@ -93,10 +92,10 @@ export default class EventoController {
         resp.type("application/json");
         if (req.method === "DELETE" && req.is('application/json')) {
             const dados = req.body;
-            const codigo = dados.codigo;
-            if (codigo) {
+            const id = dados.id;
+            if (id) {
                 // Excluir
-                const evento = new Evento(codigo);
+                const evento = new Evento(id);
                 // Método assíncrono
                 evento.removerBancoDados().then(() => {
                     resp.status(200).json({
@@ -151,12 +150,12 @@ export default class EventoController {
 
     consultaEvento(req, resp) {
         resp.type("application/json");
-        const codigo = req.params['codigo'];
+        const id = req.params['id'];
         if (req.method === "GET") {
             // Consulta
             const evento = new Evento();
             // Método assíncrono
-            evento.consultarCodigo(codigo).then((listaEventos) => {
+            evento.consultarCodigo(id).then((listaEventos) => {
                 resp.status(200).json(listaEventos);
             }).catch((erro) => {
                 resp.status(500).json({

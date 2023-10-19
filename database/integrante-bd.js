@@ -92,7 +92,8 @@ export default class IntegranteBD {
             
             for (let i2 = 0; i2 < resultado[0].length; i2++) {
                 const element = resultado[0][i2];
-                let funcao = new Funcao(element['id'], element['nome'])
+                let funcao = new Funcao(element['nome'])
+                funcao.id = element['id'];
                 listaDeFuncoes.push(funcao)
             }
 
