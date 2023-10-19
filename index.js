@@ -1,5 +1,5 @@
 import express from 'express';
-import IntegranteRota from "./routes/integrante-rota.js";
+// import IntegranteRota from "./routes/integrante-rota.js";
 import EventoRota from "./routes/evento-rota.js";
 import MusicaRota from './routes/musica-rota.js';
 import MaterialRota from './routes/material-rota.js';
@@ -8,12 +8,17 @@ import LoginSistemaRota from './routes/login-sistema-rota.js';
 import CategoriaMaterialRota from './routes/categoria-material-rota.js';
 
 const PORT = 4029;
+let HOSTNAME = 'localhost';
 
-// PARA SUBIR NO SERVIDOR
-// const HOSTNAME = '0.0.0.0';
+if (process.platform === 'linux') {
+    // PARA SUBIR NO SERVIDOR
+    let HOSTNAME = '0.0.0.0';
+    console.log('O ambiente é Linux.');
+} else {
+    //PARA TESTE LOCAL
+    console.log('Ambiente Windows.');
+}
 
-//PARA TESTE LOCAL
-const HOSTNAME = 'localhost';
 
 const app = express();
 app.use((req, res, next) => {
@@ -35,7 +40,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json());
 
-app.use('/integrante', IntegranteRota);
+// app.use('/integrante', IntegranteRota);
 app.use('/evento', EventoRota);
 app.use('/musica', MusicaRota);
 app.use('/material', MaterialRota);
