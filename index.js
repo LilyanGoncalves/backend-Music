@@ -1,5 +1,5 @@
 import express from 'express';
-// import IntegranteRota from "./routes/integrante-rota.js";
+import IntegranteRota from "./routes/integrante-rota.js";
 import EventoRota from "./routes/evento-rota.js";
 import MusicaRota from './routes/musica-rota.js';
 import MaterialRota from './routes/material-rota.js';
@@ -40,7 +40,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json());
 
-// app.use('/integrante', IntegranteRota);
+app.use('/integrante', IntegranteRota);
 app.use('/evento', EventoRota);
 app.use('/musica', MusicaRota);
 app.use('/material', MaterialRota);
