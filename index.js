@@ -10,10 +10,10 @@ import CategoriaMaterialRota from './routes/categoria-material-rota.js';
 const PORT = 4029;
 
 // PARA SUBIR NO SERVIDOR
-const HOSTNAME = '0.0.0.0';
+// const HOSTNAME = '0.0.0.0';
 
 //PARA TESTE LOCAL
-// const HOSTNAME = 'localhost';
+const HOSTNAME = 'localhost';
 
 const app = express();
 app.use((req, res, next) => {
