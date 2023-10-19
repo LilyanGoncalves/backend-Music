@@ -8,6 +8,7 @@ export default class Evento {
     #descricao;
     #listaMusicos;//[{id,nome,idFuncao,funcaoNome}]
     #listaMusicas;//[{id,nome,tomEscolhido,bpmEscolhido,linkYouTube}]
+    
 
     constructor(nome, data, horario, descricao, listaMusicos, listaMusicas) {
         this.#nome = nome;
